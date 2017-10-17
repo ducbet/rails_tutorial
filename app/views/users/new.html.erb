@@ -9,6 +9,12 @@
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
 
+        <%= f.label :gender %>
+        <%= f.select :gender, ["Male", "Female", "Unknown"] %>
+
+        <%= f.label :birthday %>
+        <%= f.date_select :birthday%>
+
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control' %>
 
