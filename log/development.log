@@ -6871,3 +6871,75 @@ Migrating to AddGenderToUsers (20171017152627)
             FROM sqlite_temp_master
             WHERE name='index_users_on_email' AND type='index'
 [0m
+Started GET "/" for 127.0.0.1 at 2017-10-28 12:41:17 +0700
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (925.2ms)
+  Rendered layouts/_rails_default.html.erb (187.4ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (13.9ms)
+  Rendered layouts/_footer.html.erb (0.8ms)
+Completed 200 OK in 1178ms (Views: 1164.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-28 12:41:24 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_error_messages.html.erb (0.5ms)
+  Rendered users/new.html.erb within layouts/application (81.5ms)
+  Rendered layouts/_rails_default.html.erb (24.5ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (1.7ms)
+  Rendered layouts/_footer.html.erb (0.8ms)
+Completed 200 OK in 116ms (Views: 114.6ms | ActiveRecord: 0.1ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/users" for 127.0.0.1 at 2017-10-28 12:44:33 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"T6hIIuXG6J8f1kQPLTihp79XUhI+obDIqgM3PVfXshiL6xEc4PxCoNyVO7JJj/xJkqCynNPzEn5Kb05y6hQOPQ==", "user"=>{"name"=>"12xzc", "gender"=>"Male", "birthday(1i)"=>"2017", "birthday(2i)"=>"10", "birthday(3i)"=>"28", "email"=>"qodiuioqw@as.ad", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create my account"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "qodiuioqw@as.ad"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at", "password_digest", "birthday", "gender") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "12xzc"], ["email", "qodiuioqw@as.ad"], ["created_at", "2017-10-28 05:44:33.183878"], ["updated_at", "2017-10-28 05:44:33.183878"], ["password_digest", "$2a$10$InKvMBkEENQhjSZnRNb7x.utHzOPs89jWxFQBoVWd4.egY7A8oVZS"], ["birthday", "2017-10-28"], ["gender", "t"]]
+  [1m[35m (5008.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 5084ms (ActiveRecord: 5010.3ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::BusyException: database is locked: commit transaction):
+  
+app/controllers/users_controller.rb:13:in `create'
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+Started POST "/users" for 127.0.0.1 at 2017-10-28 12:45:09 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cTc8rczSF7OJkuZdQzJ7ClLpk5oWAnqewRfNXQt/LKXJWRBPfIXsc1gB+NEyHcr0U+N3qP7hLwRXgXQ/pqI5Aw==", "user"=>{"name"=>"12xzc", "gender"=>"Male", "birthday(1i)"=>"2017", "birthday(2i)"=>"10", "birthday(3i)"=>"28", "email"=>"qodiuioqw@as.ad", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create my account"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "qodiuioqw@as.ad"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at", "password_digest", "birthday", "gender") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "12xzc"], ["email", "qodiuioqw@as.ad"], ["created_at", "2017-10-28 05:45:09.137035"], ["updated_at", "2017-10-28 05:45:09.137035"], ["password_digest", "$2a$10$HhXcNpaKO4N14BD7PeOVNOa0.3bcvZdC2/vbLXJEZzNQ6wcZ/bzjO"], ["birthday", "2017-10-28"], ["gender", "t"]]
+  [1m[35m (6.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users/5
+Completed 302 Found in 80ms (ActiveRecord: 7.3ms)
+
+
+Started GET "/users/5" for 127.0.0.1 at 2017-10-28 12:45:09 +0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (0.5ms)
+  Rendered layouts/_rails_default.html.erb (22.4ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 31ms (Views: 28.7ms | ActiveRecord: 0.2ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
